@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Droid Sans', 'Helvetica','arial',sans-serif;
+
+    background: #ccc ;  /*#63a1c9;*/
+}
+
+
+#content {
+    width: 80%;
+    min-height:75px;
+    background-color:#4a4a4a;
+    -webkit-box-shadow: 5px 5px 5px #222;
+    box-shadow:5px 5px 5px #222;
+    margin: auto;
+}
+
+#header {
+    height: 46px;
+    width: 80%;
+
+    margin: auto;
+}
+
+#header .title{
+    color:#BCE27F;
+    padding-left:20px;
+    text-shadow: 2px 2px 2px #000;
+    border-bottom:1px solid #888;
+}
+#header h1{
+    color:#f14b51;
+    font: 2.5em 'Droid Sans';
+    font-weight:bold;
+    width:20%;
+    display:inline;
+    text-shadow: 1px 1px 2px #000;
+
+}
+
+button {
+    font: 14px;
+    background-color: #222;
+    background-image: -moz-linear-gradient(top, rgba(255,255,255,.25), rgba(255,255,255,.11));
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, rgba(255,255,255,.25)),color-stop(1, rgba(255,255,255,.11)));
+    background-image: -webkit-linear-gradient(rgba(255,255,255,.25), rgba(255,255,255,.11));
+    color: #fff;
+    text-rendering: optimizeLegibility;
+    text-shadow: 0 -1px 1px #222;
+    padding: 6px 10px 6px 10px;
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid #222;
+    margin: 0;
+    -moz-box-shadow: 0 1px 3px #999;
+    -webkit-box-shadow: 0 1px 3px #999;
+    cursor:pointer;
+    min-width:70px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+button:hover {
+    color: #f14b51;
+}
+
+ul{
+    list-style:none;
+    font: 1.2em 'Droid Sans';
+    padding-top:10px;
+    text-shadow: 1px 1px 2px #000;
+
+}
+
+input, select{
+    border:1px solid #ccc;
+    padding:5px;
+    font:24px;
+    width:55%;
+    margin:10px;
+}
+
+select {
+    width:10%;
+}
+
+ul{
+
+    width:50%;
+    margin:auto;
+    padding-top:30px;
+    padding-bottom:30px;
+}
+
+label{
+    float:left;
+    color: #ccc;
+    font: 1.5em 'Droid Sans';
+    padding-top:10px;
+    font-weight:bold;
+    display:inline;
+    height:30px;
+    text-shadow: 1px 1px 2px #000;
+    padding-right:10px;
+}
+
+a {    text-decoration: none;}
+a:link {color: #BCE27F;}
+a.address:visited { color: #ccc;}
+
+a:visited{color:#BCE27F}
+a:hover { color:#f14b51}
+
+button.disabled {
+    color: #444;
+}
+
+button.disabled:hover {
+    color: #444;
+}

@@ -1,0 +1,16 @@
+<uwsgi>
+    <pythonpath>/var/www/findr.co.nz/www/</pythonpath>
+    <pythonpath>/var/www/findr.co.nz/</pythonpath>
+    <app mountpoint="/">
+        <script>run</script>
+    </app>
+</uwsgi>
+
+
+
+<uwsgi>
+    <pythonpath>/var/www/pitweb</pythonpath>
+    <app mountpoint="/">
+        <script>run</script>
+    </app>
+</uwsgi>

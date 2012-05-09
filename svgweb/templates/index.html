@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>SVG to PDF</title>
+    <link rel=stylesheet type=text/css href="/static/style.css">
+
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js'></script>
+    <script>
+
+</script>
+</head>
+<body>
+    <div id="header">
+        <h1>Convert URL</h1>
+    </div>
+    <div id="content">
+        <ul id='js_ul'>
+            <li>
+                <input name="url" id='js_url' >
+                <label for='url' > URL </label>
+                <select id='js_ext'>
+                    <option value='.pdf'>PDF</option>
+                    <option value='.png'>PNG</option>
+                </select>
+                <button id='js_convert'>Convert</button>
+            </li>
+        </ul>
+
+    <script>
+        $('#js_convert').bind('click', function(){
+            $('#js_convert').attr('disabled', true).addClass('disabled');
+            $.ajax({
+                'url': '/ajax/convert/',
+                'data': {
+                        'url': $('#js_url').val(),
+                        'ext': $('#js_ext').val()
+                        },
+                'failure': function(o){
+                    alert(o);
+                    $('#js_convert').attr('disabled', false).removeClass('disabled');
+                },
+                'success': function(o){
+                    $('#js_convert').attr('disabled', false).removeClass('disabled');
+                    var data = $.parseJSON(o)
+                    console.log(data)
+                    if (data.status != 'OK'){
+                        alert(data.data);
+                        return;
+                    }
+                    filename = data.data;
+                    $('#js_ul').append(
+                        $('<li><a href="/static/data/' + filename.substring(0,2) + '/' + filename +'">' + filename + '</a>')
+                        )
+                }
+            });
+        });
+    </script>
+    </div>
+</body>
+</html>
