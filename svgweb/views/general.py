@@ -10,5 +10,3 @@ log = logging.getLogger('svg-web')
 @mod.route('/')
 def index():
     return 'Hello World'
-
-
