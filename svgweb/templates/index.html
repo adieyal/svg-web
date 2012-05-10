@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
     <title>SVG to PDF</title>
-    <link rel=stylesheet type=text/css href="/static/style.css">
+    <link rel=stylesheet type=text/css href="/static/s.css">
 
     <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
     <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js'></script>
@@ -17,13 +17,18 @@
     <div id="content">
         <ul id='js_ul'>
             <li>
-                <input name="url" id='js_url' >
+                <input name="url" id='js_url' value="http://localhost/freelancer/adi/svg/" >
                 <label for='url' > URL </label>
                 <select id='js_ext'>
                     <option value='.pdf'>PDF</option>
                     <option value='.png'>PNG</option>
                 </select>
+
                 <button id='js_convert'>Convert</button>
+            </li>
+            <li>
+                 <input name="pages" id='js_pages' style="width:2.5%" value="2">
+                <label for='pages' > # Pages </label>
             </li>
         </ul>
 
@@ -34,7 +39,8 @@
                 'url': '/ajax/convert/',
                 'data': {
                         'url': $('#js_url').val(),
-                        'ext': $('#js_ext').val()
+                        'ext': $('#js_ext').val(),
+                        'pages': $('#js_pages').val()
                         },
                 'failure': function(o){
                     alert(o);

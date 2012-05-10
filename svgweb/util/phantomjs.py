@@ -9,6 +9,9 @@ import logging
 
 log = logging.getLogger('svg-web')
 
+env = dict(os.environ)
+env['DISPLAY'] = ':0'
+
 
 def randstr(len):
     return ''.join(random.choice(alphabet)
@@ -24,6 +27,7 @@ def convert_url(url, clip=None, ext='.pdf'):
     fileinfo = get_file(ext)
 
     log.info(fileinfo)
+
     command = [config.phantom_path,
                 config.phantom_convert_path,
                 url,
@@ -42,10 +46,11 @@ def convert_url(url, clip=None, ext='.pdf'):
     if use_clip:
         command.extend(clip_arry)
 
-    proc = subprocess.Popen(command)
+    log.info(' '.join(command))
+    proc = subprocess.Popen(command, env=env)
     log.info(proc.communicate(5))
 
-    return fileinfo['file']
+    return fileinfo
 
 
 def convert_pdf(url, clip=None):

@@ -2,11 +2,10 @@ from flask import Flask
 
 import logging
 
-
 log = logging.getLogger('svg-web')
 log.setLevel(logging.DEBUG)
 
-fh = logging.FileHandler('/home/blayne/findr.log')
+fh = logging.FileHandler('/var/log/cherokee/chard.co.nz/convert.log')
 fh.setLevel(logging.INFO)
 
 ch = logging.StreamHandler()

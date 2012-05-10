@@ -25,7 +25,7 @@ if (phantom.args.length > 2){
 
 
 var page = require('webpage').create();
-console.log ('loading ' + url);
+//console.log ('loading ' + url);
 
 page.open(url, function (status) {
   // do something
@@ -34,6 +34,6 @@ page.open(url, function (status) {
     }
 
     page.render(output);
-    console.log(output + ' Saved');
+    //console.log(output + ' Saved');
     phantom.exit();
 });

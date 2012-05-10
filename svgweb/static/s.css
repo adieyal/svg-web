@@ -81,7 +81,7 @@ input, select{
     border:1px solid #ccc;
     padding:5px;
     font:24px;
-    width:55%;
+    width:50%;
     margin:10px;
 }
 
@@ -91,7 +91,7 @@ select {
 
 ul{
 
-    width:50%;
+    width:60%;
     margin:auto;
     padding-top:30px;
     padding-bottom:30px;

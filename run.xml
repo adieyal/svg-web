@@ -1,16 +1,6 @@
 <uwsgi>
-    <pythonpath>/var/www/findr.co.nz/www/</pythonpath>
-    <pythonpath>/var/www/findr.co.nz/</pythonpath>
-    <app mountpoint="/">
-        <script>run</script>
-    </app>
+    <pythonpath>/var/www/chard.co.nz/convert/svgweb/</pythonpath>
+    <pythonpath>/var/www/chard.co.nz/convert/</pythonpath>
+    <wsgi-file>/var/www/chard.co.nz/convert/run.py</wsgi-file>
 </uwsgi>
 
-
-
-<uwsgi>
-    <pythonpath>/var/www/pitweb</pythonpath>
-    <app mountpoint="/">
-        <script>run</script>
-    </app>
-</uwsgi>

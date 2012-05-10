@@ -1,5 +1,5 @@
 # Path to phantomjs executable
-phantom_path = '/usr/bin/phantomjs'
+phantom_path = '/usr/local/bin/phantomjs'
 phantom_convert_path = '/var/www/chard.co.nz/convert/js-bin/phantom_convert.js'
 
 # Path to convert

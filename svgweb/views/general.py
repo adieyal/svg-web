@@ -8,6 +8,7 @@ import json
 log = logging.getLogger('svg-web')
 
 import svgweb.util.phantomjs as pjs
+import svgweb.util.pdf_util as pdf
 
 
 @mod.route('/')
@@ -28,22 +29,48 @@ def convert():
     if ext != '.png' and ext != '.pdf':
         return ajax_error('invalid format png/pdf only')
 
-    url = a['url']
-    filename = None
-
-    if not 'clip_top' in a:
-        filename = pjs.convert_url(url, ext=ext)
-
+    if not 'max_pages' in a:
+        max_pages = 1
     else:
-        clip = make_clip(a['clip_top'],
-                        a['clip_left'],
-                        a['clip_height'],
-                        a['clip_width'])
+        max_pages = int(a['max_pages'])
 
-        filename = pjs.convert_url(url, clip=clip, ext=ext)
+    url = a['url']
+    if not url.startswith('http://') and \
+        not url.startswith('https://'):
+        url = 'http://' + url
 
-    if filename is None:
-        return ajax_error('unable to convert %s' % url)
+    pages = 1
+    if 'pages' in a:
+        pages = int(a['pages'])
+
+    logging.info('found %d pages' % pages)
+
+    data = []
+    for x in xrange(pages):
+        check_url = url
+        if x > 0:
+            check_url = url + '?page=%d' % (x + 1)
+        fileinfo = None
+        if not 'clip_top' in a:
+            fileinfo = pjs.convert_url(check_url, ext=ext)
+            logging.info(fileinfo)
+        else:
+            clip = make_clip(a['clip_top'],
+                            a['clip_left'],
+                            a['clip_height'],
+                            a['clip_width'])
+
+            fileinfo = pjs.convert_url(check_url, clip=clip, ext=ext)
+
+        if fileinfo['file'] is None:
+            return ajax_error('unable to convert %s' % check_url)
+        data.append(fileinfo)
+        pdf.remove_pages(fileinfo['path'], max_pages)
+
+    if len(data) > 0:
+        filename = pdf.merge_pages(data)
+    else:
+        filename = data[0]['file']
 
     return ajax_ok(filename)
 
