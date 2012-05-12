@@ -65,9 +65,10 @@ def convert():
         if fileinfo['file'] is None:
             return ajax_error('unable to convert %s' % check_url)
         data.append(fileinfo)
-        pdf.remove_pages(fileinfo['path'], max_pages)
+        if ext == '.pdf':
+            pdf.remove_pages(fileinfo['path'], max_pages)
 
-    if len(data) > 0:
+    if len(data) > 1:
         filename = pdf.merge_pages(data)
     else:
         filename = data[0]['file']

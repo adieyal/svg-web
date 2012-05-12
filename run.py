@@ -10,4 +10,5 @@ if __name__ == '__main__':
 #    libicu48
 #    phantomjs
 # pip install flask
+# pip install pypdf
 # framebuffer http://code.google.com/p/phantomjs/wiki/XvfbSetup

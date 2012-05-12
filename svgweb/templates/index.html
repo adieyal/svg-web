@@ -17,7 +17,7 @@
     <div id="content">
         <ul id='js_ul'>
             <li>
-                <input name="url" id='js_url' value="http://localhost/freelancer/adi/svg/" >
+                <input name="url" id='js_url' value="" >
                 <label for='url' > URL </label>
                 <select id='js_ext'>
                     <option value='.pdf'>PDF</option>
@@ -27,7 +27,7 @@
                 <button id='js_convert'>Convert</button>
             </li>
             <li>
-                 <input name="pages" id='js_pages' style="width:2.5%" value="2">
+                 <input name="pages" id='js_pages' style="width:2.5%" value="1">
                 <label for='pages' > # Pages </label>
             </li>
         </ul>
@@ -35,10 +35,11 @@
     <script>
         $('#js_convert').bind('click', function(){
             $('#js_convert').attr('disabled', true).addClass('disabled');
+            var url = $('#js_url').val()
             $.ajax({
                 'url': '/ajax/convert/',
                 'data': {
-                        'url': $('#js_url').val(),
+                        'url': url,
                         'ext': $('#js_ext').val(),
                         'pages': $('#js_pages').val()
                         },
@@ -56,7 +57,7 @@
                     }
                     filename = data.data;
                     $('#js_ul').append(
-                        $('<li><a href="/static/data/' + filename.substring(0,2) + '/' + filename +'">' + filename + '</a>')
+                        $('<li><a href="/static/data/' + filename.substring(0,2) + '/' + filename +'">' + filename + '</a> - <p>' + url + '</p>')
                         )
                 }
             });

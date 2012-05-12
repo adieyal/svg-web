@@ -25,8 +25,9 @@ if (phantom.args.length > 2){
 
 
 var page = require('webpage').create();
-//console.log ('loading ' + url);
+console.log ('loading ' + url);
 
+page.viewportSize = {'width':1920, 'height': 1080};
 page.open(url, function (status) {
   // do something
     if( clip !== undefined){
@@ -34,6 +35,6 @@ page.open(url, function (status) {
     }
 
     page.render(output);
-    //console.log(output + ' Saved');
+    console.log(output + ' Saved');
     phantom.exit();
 });
