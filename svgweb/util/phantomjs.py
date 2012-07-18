@@ -33,20 +33,10 @@ def convert_url(url, clip=None, ext='.pdf'):
                 url,
                 fileinfo['path']]
 
-    use_clip = False
-    if not clip is None:
-
-        clip_arry = []
-        for x in ['top', 'left', 'width', 'height']:
-            clip_arry.append(clip[x])
-
-            if clip[x] != 0:
-                use_clip = True
-
-    if use_clip:
-        command.extend(clip_arry)
+    command.append('A4')
 
     log.info(' '.join(command))
+    print ' '.join(command)
     proc = subprocess.Popen(command, env=env)
     log.info(proc.communicate(5))
 

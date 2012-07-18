@@ -1,40 +1,31 @@
+var page = require('webpage').create(),
+    system = require('system'),
+    address, output, size;
 
-if (phantom.args.length < 2){
-    console.log('not enough arguments!\n Usage, phantom_cli.js <url> <output> [clip_x clip_y clip_width clip_height]');
-    phantom.exit();
-}
-
-var url = phantom.args[0];
-var output = phantom.args[1];
-var clip;
-
-if (phantom.args.length > 2){
-    if (phantom.args.length < 6){
-        console.log('not enough arguments!\n Usage, phantom_cli.js <url> <output> [clip_x clip_y clip_width clip_height]');
-        phantom.exit();
+if (system.args.length < 3 || system.args.length > 5) {
+    console.log('Usage: rasterize.js URL filename [paperwidth*paperheight|paperformat] [zoom]');
+    console.log('  paper (pdf output) examples: "5in*7.5in", "10cm*20cm", "A4", "Letter"');
+    phantom.exit(1);
+} else {
+    address = system.args[1];
+    output = system.args[2];
+    page.viewportSize = { width: 600, height: 600 };
+    if (system.args.length > 3 && system.args[2].substr(-4) === ".pdf") {
+        size = system.args[3].split('*');
+        page.paperSize = size.length === 2 ? { width: size[0], height: size[1], margin: '0px' }
+                                           : { format: system.args[3], orientation: 'portrait', margin: '1cm' };
     }
-    clip = {
-        top: phantom.args[2],
-        left: phantom.args[3],
-        width: phantom.args[4],
-        height: phantom.args[5]
-    };
-    console.log('using clipping');
-}
-
-
-
-var page = require('webpage').create();
-console.log ('loading ' + url);
-
-page.viewportSize = {'width':1920, 'height': 1080};
-page.open(url, function (status) {
-  // do something
-    if( clip !== undefined){
-        page.clipRect = clip;
+    if (system.args.length > 4) {
+        page.zoomFactor = system.args[4];
     }
-
-    page.render(output);
-    console.log(output + ' Saved');
-    phantom.exit();
-});
+    page.open(address, function (status) {
+        if (status !== 'success') {
+            console.log('Unable to load the address!');
+        } else {
+            window.setTimeout(function () {
+                page.render(output);
+                phantom.exit();
+            }, 200);
+        }
+    });
+}
